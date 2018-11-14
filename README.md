@@ -1,6 +1,10 @@
 # Vault Docker Development
 
-## Initialize
+## Run
+
+docker-compose up -d
+
+## Initialize Vault
 
 curl http://127.0.0.1:8200/v1/sys/seal-status
 
@@ -14,3 +18,7 @@ curl -X PUT -d '{"key": "36f473f74a9ea959e36e681bc0b5fd4ef859e249ea972406e1d4a3f
 ## Insert data
 
 curl -X POST -H "X-Vault-Token: 1W1OuYGActCjHVyO1SD472pq" -H "Content-Type: application/json" -d '{ "data": { "foo": "world" } }' http://127.0.0.1:8200/v1/secret/data/hello
+
+## Vault UI
+
+http://localhost:8000
