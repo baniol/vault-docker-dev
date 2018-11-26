@@ -6,6 +6,19 @@ docker-compose up -d
 
 ## Initialize Vault
 
+
+### CLI
+
+install vault cli
+wget https://releases.hashicorp.com/vault/0.11.5/vault_0.11.5_linux_amd64.zip
+unzip vault_0.11.5_linux_amd64.zip
+sudo mv vault /usr/local/bin
+
+export VAULT_ADDR="http://localhost:8200"
+
+
+### API
+
 curl http://127.0.0.1:8200/v1/sys/seal-status
 
 curl --request PUT -d '{"secret_shares":3, "secret_threshold":2}' http://127.0.0.1:8200/v1/sys/init
@@ -22,3 +35,22 @@ curl -X POST -H "X-Vault-Token: 1W1OuYGActCjHVyO1SD472pq" -H "Content-Type: appl
 ## Vault UI
 
 http://localhost:8000
+
+## Creating tokens
+
+vault create token -ttl=1m
+export VAULT_TOKEN=<token>
+vault token lookup
+
+## Links 
+
+* https://www.baeldung.com/vault
+
+## Token & leases
+
+https://learn.hashicorp.com/vault/secrets-management/sm-lease
+
+periodic tokens
+
+vault write auth/token/roles/zabbix allowed_policies="default" period="24h"
+vault token create -role test_1
